@@ -1,32 +1,16 @@
+# Testing AASM Callbacks
 
-# README
+Having a problem with another application that doesn't make sense, so
+testing it with this little thing.
 
-A newly generated Rails application with the following already baked in:
+## Question
 
-* pry
-* rspec
-* factory girl
-* haml
-* twitter bootstrap
-* additional support for twitter bootstrap form building
+Can you test that after method do get called?
 
-The database you've chosen has already been created.
+## Answer
 
-There is a static startup page at root.
+Yes.
 
-Tests are run with:
+## Methodology
 
-    bin/rake # with no parameters
-
-or:
-
-    bin/rspec
-
-Information you should add here:
-
-* Ruby version
-* System dependencies
-* Configuration
-* Services (job queues, cache servers, search engines, etc.)
-* Deployment instructions
-
+See `app/models/thing.rb` and `spec/models/thing_spec.rb`.

@@ -33,3 +33,4 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'html2haml'
 end
+gem "aasm"
