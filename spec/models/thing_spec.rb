@@ -3,18 +3,16 @@ require 'rails_helper'
 RSpec.describe Thing, type: :model do
   let(:thing) { Thing.create(name: "asdfasdfasdf") }
 
-  it "runs" do
-    expect(thing).to receive(:run!).and_call_original
-    expect(thing).to receive(:running_guard).and_return true
-    expect(thing).to receive(:process_running).and_call_original
-    thing.run!
-    expect(thing).to be_running
+  context "when thing is sleeping" do
+    context "when sleeping_guard is true" do
+      it "stays asleep" do
+        expect(thing).to receive(:crank!).and_call_original
+        expect(thing).to receive(:sleeping_guard).and_return true
+        expect(thing).to receive(:process_sleeping).and_call_original
+        thing.crank!
+        expect(thing).to be_sleeping
+      end
+    end
   end
-  it "sleeps" do
-    expect(thing).to receive(:run!).and_call_original
-    expect(thing).to receive(:running_guard).and_return false
-    expect(thing).not_to receive(:process_running).and_call_original
-    thing.run!
-    expect(thing).to be_sleeping
-  end
+
 end

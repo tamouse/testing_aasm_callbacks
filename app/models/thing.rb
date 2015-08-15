@@ -5,15 +5,28 @@ class Thing < ActiveRecord::Base
     state :sleeping, initial: true
     state :running
 
-    event :run do
+    event :crank do
+      transitions from: :sleeping, to: :sleeping do
+        guard { sleeping_guard }
+        after { process_sleeping }
+      end
       transitions from: :sleeping, to: :running do
         guard { running_guard }
         after { process_running }
       end
-      transitions from: :sleeping, to: :sleeping do
-        after { process_sleeping }
+      transitions from: :running, to: :running do
+        guard { running_guard }
+        after { process_running }
+      end
+      transitions from: :running, to: :sleeping do
+        guard { sleeping_guard }
+        after { process_running }
       end
     end
+  end
+
+  def sleeping_guard
+    true
   end
 
   def running_guard
